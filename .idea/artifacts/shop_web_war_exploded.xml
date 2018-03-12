@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="shop.web:war exploded">
+    <output-path>$PROJECT_DIR$/shop.web/target/shop</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="shop.web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="shop.ejb-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="shop.ejb" />
+          </element>
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/shop.web/target/shop/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="shop.web/web/Web" />
+    </root>
+  </artifact>
+</component>

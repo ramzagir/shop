@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="shop.ear:ear exploded">
+    <output-path>$PROJECT_DIR$/shop.ear/target/shop</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="shop.ear/javaeeApplication/JavaEE" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/shop.ear/target/shop/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="dir-copy" path="$PROJECT_DIR$/shop.ear/src/main/application" />
+      <element id="archive" name="shop.ejb-1.0-SNAPSHOT.jar">
+        <element id="artifact" artifact-name="shop.ejb:ejb exploded" />
+      </element>
+      <element id="archive" name="shop.web-1.0-SNAPSHOT.war">
+        <element id="artifact" artifact-name="shop.web:war exploded" />
+      </element>
+    </root>
+  </artifact>
+</component>

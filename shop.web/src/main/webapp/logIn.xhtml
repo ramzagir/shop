@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Log In</title>
+    <h1>Регистрация</h1>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid id="login" columns="2">
+            <h:outputLabel value="Введите логин"/>
+            <h:inputText value="#{loginBean.user.login}" required="true"
+                         requiredMessage="#{loginBean.EMPTY_LOGIN}"
+                         validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
+                <f:validateRegex pattern="[a-zA-Z].[_0-9a-zA-Z]{2,20}"/>
+            </h:inputText>
+
+
+            <h:outputLabel value="Введите пароль"/>
+            <h:inputSecret value="#{loginBean.user.password}" required="true"
+                           requiredMessage="#{loginBean.EMPTY_PASSWORD}"
+                           validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
+                <f:validateRegex pattern="[_0-9a-zA-Z]{2,20}"/>
+            </h:inputSecret>
+
+            <h:outputLabel value="Повторите пароль"/>
+            <h:inputSecret value="#{loginBean.pass}"
+                           requiredMessage="#{loginBean.EMPTY_PASSWORD}"
+                           validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
+                <f:validateRegex pattern="[_0-9a-zA-Z]{2,20}"/>
+            </h:inputSecret>
+
+            <h:commandButton value="Log In" action="#{loginBean.loginUser}"/>
+            <h:outputText value="#{loginBean.message}"/>
+        </h:panelGrid>
+        <h:messages/>
+    </h:form>
+</h:body>
+</html>

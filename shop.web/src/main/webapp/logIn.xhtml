@@ -4,40 +4,134 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Log In</title>
-    <h1>Регистрация</h1>
+    <title>Registration</title>
+    <style type="text/css">
+        .header {
+            height: 50px;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .picture {
+            height: 100%;
+            width: 10%
+        }
+
+        .date {
+            height: 100%;
+            width: 80%;
+            text-align: right
+        }
+    </style>
+    <style type="text/css">
+        .container {
+            font-size: 13px;
+            margin: auto;
+            padding: 15px;
+            height: 600px;
+            width: 1000px;
+        }
+        .bottomArea{
+            width: 100%;
+            height: 50px;
+        }
+    </style>
 </h:head>
 <h:body>
-    <h:form>
-        <h:panelGrid id="login" columns="2">
-            <h:outputLabel value="Введите логин"/>
-            <h:inputText value="#{loginBean.user.login}" required="true"
-                         requiredMessage="#{loginBean.EMPTY_LOGIN}"
-                         validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
-                <f:validateRegex pattern="[a-zA-Z].[_0-9a-zA-Z]{2,20}"/>
-            </h:inputText>
-
-
-            <h:outputLabel value="Введите пароль"/>
-            <h:inputSecret value="#{loginBean.user.password}" required="true"
-                           requiredMessage="#{loginBean.EMPTY_PASSWORD}"
-                           validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
-                <f:validateRegex pattern="[_0-9a-zA-Z]{2,20}"/>
-            </h:inputSecret>
-
-            <h:outputLabel value="Повторите пароль"/>
-            <h:inputSecret value="#{loginBean.pass}"
-                           requiredMessage="#{loginBean.EMPTY_PASSWORD}"
-                           validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
-                <f:validateRegex pattern="[_0-9a-zA-Z]{2,20}"/>
-            </h:inputSecret>
-
-            <h:commandButton value="Log In" action="#{loginBean.loginUser}"/>
-            <h:outputText value="#{loginBean.message}"/>
-        </h:panelGrid>
-        <h:messages/>
-    </h:form>
+    <div class="container">
+        <table class="header">
+            <tr>
+                <td class="picture">
+                    Картинка
+                </td>
+                <td class="date">
+                    Дата:
+                </td>
+            </tr>
+        </table>
+        <hr/>
+        <table>
+            <tr>
+                <td width="33%"/>
+                <td>
+                    <h3 style="text-align: center">Регистрация в системе</h3>
+                </td>
+                <td width="33%"/>
+            </tr>
+            <tr>
+                <td width="33%"/>
+                <td class="conForm" style="padding-bottom: 300px">
+                    <h:form>
+                        <table>
+                            <tr>
+                                <td><p:outputLabel for="login" value="Введите логин"/></td>
+                                <td>
+                                    <p:inputText id="login" value="#{loginBean.user.login}" required="true"
+                                                 requiredMessage="#{loginBean.EMPTY_LOGIN}"
+                                                 validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
+                                        <f:validateRegex pattern="[a-zA-Z].[_0-9a-zA-Z]{2,20}"/>
+                                    </p:inputText>
+                                </td>
+                                <td>
+                                    <p:message for="login"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:outputLabel for="password" value="Введите пароль"/>
+                                </td>
+                                <td>
+                                    <p:password id="password" value="#{loginBean.user.password}" required="true"
+                                                   requiredMessage="#{loginBean.EMPTY_PASSWORD}"
+                                                   validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
+                                        <f:validateRegex pattern="[_0-9a-zA-Z]{4,20}"/>
+                                    </p:password>
+                                </td>
+                                <td>
+                                    <p:message for="password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:outputLabel for="password2" value="Повторите пароль"/>
+                                </td>
+                                <td>
+                                    <p:password id="password2" value="#{loginBean.pass}"
+                                                   requiredMessage="#{loginBean.EMPTY_PASSWORD}"
+                                                   validatorMessage="#{loginBean.VALIDATOR_MESSAGE}">
+                                        <f:validateRegex pattern="[_0-9a-zA-Z]{4,20}"/>
+                                    </p:password>
+                                </td>
+                                <td>
+                                    <p:message for="password2"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td style="text-align: right">
+                                    <h:commandButton value="Log In" action="#{loginBean.loginUser}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><h:outputText value="#{loginBean.messageError}"/></td>
+                            </tr>
+                        </table>
+                    </h:form>
+                </td>
+                <td width="33%"/>
+            </tr>
+        </table>
+        <hr/>
+        <table class="bottomArea">
+            <tr>
+                <td style="width: 33%"/>
+                <td><p:link value="Вернуться домой" outcome="home"/></td>
+                <td>Разработано: Мной</td>
+            </tr>
+        </table>
+    </div>
 </h:body>
 </html>

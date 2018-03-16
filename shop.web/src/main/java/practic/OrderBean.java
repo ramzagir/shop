@@ -46,7 +46,17 @@ public class OrderBean implements Serializable {
     }
 
     public void addOrder(UsersEntity user){
+        if(bascket.isEmpty())
+            return;
         ordersEJB.addOrder(bascket, user);
         bascket = new ArrayList<>();
+    }
+
+    public int basketSum(){
+        int sum = 0;
+        for(ProductEntity p : bascket){
+            sum =+ p.getPrice();
+        }
+        return sum;
     }
 }

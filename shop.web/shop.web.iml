@@ -23,5 +23,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-web-api:7.0" level="project" />
     <orderEntry type="module" module-name="shop.ejb" />
+    <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.2" level="project" />
   </component>
 </module>

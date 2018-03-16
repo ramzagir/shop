@@ -22,12 +22,12 @@ public class LoginBean implements Serializable{
     // сообщение ошибки
     private String messageError;
 
-    private final String VALIDATOR_MESSAGE = "Не правильное введены данные";
-    private final String EMPTY_LOGIN = "Введите значение login";
-    private final String EMPTY_PASSWORD = "Введите значение password";
-    private final String WRONG_PASSWORD = "Не верное подтверждение пароля";
-    private final String USER_IS_EXIST = "Пользователь с таким именем уже существует";
-    private final String USER_ISNOT_EXIST = "Пользователя с таким именем не существует";
+    private static final String VALIDATOR_MESSAGE = "Не правильное введены данные";
+    private static final String EMPTY_LOGIN = "Введите значение login";
+    private static final String EMPTY_PASSWORD = "Введите значение password";
+    private static final String WRONG_PASSWORD = "Не верное подтверждение пароля";
+    private static final String USER_IS_EXIST = "Пользователь с таким именем уже существует";
+    private static final String USER_ISNOT_EXIST = "Пользователя с таким именем не существует";
 
     public String getVALIDATOR_MESSAGE() {
         return VALIDATOR_MESSAGE;
@@ -72,21 +72,21 @@ public class LoginBean implements Serializable{
 
         // check password
         if(user.getPassword().equals(pass))
-            message = "";
+            messageError = "";
         else {
-            message = WRONG_PASSWORD;
+            messageError = WRONG_PASSWORD;
             return "logIn";
         }
 
         //check login
         for(UsersEntity u : loginEJB.showUsers()) {
-            if (user.equals(u)){
+            if (user.getLogin().equals(u.getLogin())){
                 messageError = USER_IS_EXIST;
-                return "loginError";
+                return "logIn";
             }
         }
         loginEJB.addUser(user);
-        return "catalog";
+        return "user/catalog";
     }
 
     public String siginUser(){
@@ -95,12 +95,12 @@ public class LoginBean implements Serializable{
             if(user.equals(u)){
                 if(u.getRights().equals("adm"))
                     return "admin/adminPage";
-                return "user/catalog";
+                return "catalog.xhtml";
             }
         }
         // если нет такого пользователя, сообщаем об ошибке
         messageError = USER_ISNOT_EXIST;
-        return "loginError";
+        return "logIn";
     }
 
     public boolean isLogged(){
@@ -119,5 +119,11 @@ public class LoginBean implements Serializable{
             }
         }
         return false;
+    }
+
+    public String isSignInUser(UsersEntity user){
+        if(user == null){
+            return "signIn";
+        }else return "";
     }
 }

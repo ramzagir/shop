@@ -13,6 +13,10 @@ import java.util.List;
 @SessionScoped
 public class ProductBean implements Serializable {
 
+    private String searchName;
+    private List<ProductEntity> selectedProducts;
+    private List<ProductEntity> filteredProducts;
+
     private ProductEntity product = new ProductEntity();
 
     @EJB
@@ -26,6 +30,30 @@ public class ProductBean implements Serializable {
         this.product = product;
     }
 
+    public List<ProductEntity> getSelectedProducts() {
+        return selectedProducts;
+    }
+
+    public void setSelectedProducts(List<ProductEntity> selectedProducts) {
+        this.selectedProducts = selectedProducts;
+    }
+
+    public List<ProductEntity> getFilteredProducts() {
+        return filteredProducts;
+    }
+
+    public void setFilteredProducts(List<ProductEntity> filteredProducts) {
+        this.filteredProducts = filteredProducts;
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
+    }
+
     public void createProduct(){
         productEJB.createProduct(product);
         product = new ProductEntity();
@@ -37,6 +65,13 @@ public class ProductBean implements Serializable {
 
     public void updateProduct(ProductEntity product){
         productEJB.createProduct(product);
+    }
+
+    public void findProduct(){
+        for(ProductEntity p : showProducts()) {
+            if (p.getName().equalsIgnoreCase(searchName))
+                product = p;
+        }
     }
 
     public List<ProductEntity> showProducts(){

@@ -10,6 +10,7 @@
           <element id="archive" name="shop.ejb-1.0-SNAPSHOT.jar">
             <element id="module-output" name="shop.ejb" />
           </element>
+          <element id="library" level="project" name="Maven: org.primefaces:primefaces:6.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

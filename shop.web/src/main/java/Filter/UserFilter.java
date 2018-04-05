@@ -33,6 +33,7 @@ public class UserFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
+
         resp.sendRedirect(req.getContextPath() + "/home.xhtml");
     }
 

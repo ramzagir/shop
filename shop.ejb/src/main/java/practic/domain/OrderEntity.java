@@ -12,19 +12,26 @@ public class OrderEntity {
     //здесь должен быть какой-то хешкод для создания серийного номера
     private int serialNumber = 1;
 
-    @ManyToMany
+    private int sum;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "prod_in_order",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<ProductEntity> productsInOrder;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private UsersEntity user;
 
     public OrderEntity(){};
-    public OrderEntity(List<ProductEntity> productsInOrder, UsersEntity user){
+    public OrderEntity(List<ProductEntity> productsInOrder, UsersEntity user, int sum){
         this.productsInOrder = productsInOrder;
         this.user = user;
+        this.sum = sum;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public List<ProductEntity> getProductsInOrder() {
@@ -33,5 +40,17 @@ public class OrderEntity {
 
     public void setProductsInOrder(List<ProductEntity> productsInOrder) {
         this.productsInOrder = productsInOrder;
+    }
+
+    public UsersEntity getUser() {
+        return user;
+    }
+
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    public int getSum() {
+        return sum;
     }
 }

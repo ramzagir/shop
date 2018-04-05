@@ -6,16 +6,22 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users")
+@NamedQuery(name = UsersEntity.FIND_USER,
+        query = "select u from UsersEntity u where u.login =:login")
 public class UsersEntity {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(unique = true)
     private String login;
+    @Column
     private String password;
+    @Column
     private String rights = "usr";
 
+    public static final String FIND_USER = "UserEntity.FindUser";
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "user", fetch = FetchType.EAGER)
     private List<OrderEntity> userOrders;
 
     public UsersEntity(){};
@@ -54,6 +60,14 @@ public class UsersEntity {
 
     public void setRights(String rights) {
         this.rights = rights;
+    }
+
+    public List<OrderEntity> getUserOrders() {
+        return userOrders;
+    }
+
+    public void setUserOrders(List<OrderEntity> userOrders) {
+        this.userOrders = userOrders;
     }
 
     @Override

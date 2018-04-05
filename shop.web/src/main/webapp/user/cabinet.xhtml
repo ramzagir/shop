@@ -4,13 +4,143 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>#{loginBean.user.login}</title>
+    <style type="text/css">
+        .container {
+            font-size: 13px;
+            margin: auto;
+            padding: 15px;
+            height: 600px;
+            width: 1000px;
+        }
+
+        .header {
+            height: 50px;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .midle {
+            width: 100%;
+        }
+
+        .bottomArea {
+            width: 100%;
+            height: 50px;
+        }
+    </style>
+    <style type="text/css">
+        .date {
+            height: 100%;
+            width: 80%;
+            text-align: left;
+        }
+    </style>
 </h:head>
 
 <h:body>
+    <div id="container" class="container">
+        <h:form>
+            <table class="header">
+                <tr>
+                    <td class="date">
+                        Дата:
+                    </td>
+                </tr>
+            </table>
+            <hr/>
+            <table class="midle">
+                <tr>
+                    <td>
+                        <h3>Личный кабинет</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                <h:graphicImage value="/user/pictures/denis.png" />
+                            </f:facet>
+
+                            <h:outputText value="Name:" />
+                            <h:outputText value="#{loginBean.user.login}" />
+
+                            <h:outputText value="Lastname" />
+                            <h:outputText value="#{loginBean.user.login}" />
+
+                            <h:outputText value="Right" />
+                            <h:outputText value="#{loginBean.user.rights}" />
+                        </p:panelGrid>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p:dataTable var="order" value="#{orderBean.UserOrders(loginBean.user)}">
+                            <f:facet name="header">
+                                Orders
+                            </f:facet>
+                            <p:column headerText="Name">
+                                <h:outputText value="#{order.serialNumber}"/>
+                            </p:column>
+                            <p:column headerText="Year">
+                                <h:outputText value="#{order.sum}"/>
+                            </p:column>
+                            <p:column>
+                                <h:commandButton value="Show" action="#{orderBean.setSelectedOrder(order)}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </td>
+                    <td width="50%">
+                        <table style="padding-bottom: 100px">
+                            <tr>
+                                <td>
+                                    <p:dataTable value="#{orderBean.getProductsInOrder()}" var="pr">
+                                        <p:column headerText="Name">
+                                            <h:outputText value="#{pr.name}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Price" sortBy="#{pr.price}">
+                                            <h:outputText value="#{pr.price}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Quantity">
+                                            <h:outputText value="#{pr.quantity}"/>
+                                        </p:column>
+                                        <f:facet name="footer">
+                                            <p:row>
+                                                <p:column colspan="2" style="text-align: right">
+                                                    <h:outputText value="Сумма: "/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="#{orderBean.selectedOrder.sum}"/>
+                                                </p:column>
+                                            </p:row>
+                                        </f:facet>
+                                    </p:dataTable>
+                                </td>
+                            </tr>
+                            <tr>
+                                <h:outputText value="#{orderBean.message}"/>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <hr/>
+            <table class="bottomArea">
+                <tr>
+                    <td style="width: 33%"/>
+                    <!-- Исправить ссылку -->
+                    <td><p:link value="Вернуться домой"/></td>
+                    <td>Разработано: Мной</td>
+                </tr>
+            </table>
+        </h:form>
+    </div>
 
 </h:body>
 </html>

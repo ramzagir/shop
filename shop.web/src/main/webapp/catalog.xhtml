@@ -62,11 +62,14 @@
                         Дата:
                     </td>
                     <td class="cabinet">
-                        <h:commandLink value="Личный кабинет" action="user/cabinet.xhtml"/>
+                        <p:menuButton value="#{loginBean.isSignInUser(loginBean.user)}">
+                            <p:menuitem value="Личный кабинет" action="user/cabinet.xhtml"/>
+                            <p:menuitem value="Выйти" action="#{loginBean.signOut()}"/>
+                            <p:menuitem value="Помощь" action="help.html"/>
+                        </p:menuButton>
                     </td>
-                    <td width="10%">
-                        <h:commandLink value="#{loginBean.user.login}"
-                                       action="#{loginBean.isSignInUser(loginBean.user)}"/>
+                    <td>
+                        <p:commandButton value="Войти" action="#{loginBean.signOut()}"/>
                     </td>
                 </tr>
             </table>
@@ -91,14 +94,11 @@
                                                 <p:inputText id="searchProduct" onkeyup="PF('productTable').filter()"/>
                                             </p:outputPanel>
                                         </f:facet>
-                                        <p:column headerText="Name" sortBy="#{product.name}" filterBy="#{product.name}"
-                                                  filterMatchMode="contains">
+                                        <p:column headerText="Name" sortBy="#{product.name}">
                                             <h:outputText value="#{product.name}"/>
                                         </p:column>
 
-                                        <p:column headerText="Price" sortBy="#{product.price}"
-                                                  filterBy="#{product.price}"
-                                                  filterMatchMode="startWith">
+                                        <p:column headerText="Price" sortBy="#{product.price}">
                                             <h:outputText value="#{product.price} руб"/>
                                         </p:column>
 
@@ -150,6 +150,9 @@
                                     </p:dataTable>
                                 </td>
                             </tr>
+                            <tr>
+                                <h:outputText value="#{orderBean.message}"/>
+                            </tr>
                         </table>
                     </td>
                 </tr>
@@ -158,7 +161,7 @@
             <table class="bottomArea">
                 <tr>
                     <td style="width: 33%"/>
-                    <td><p:link value="Вернуться домой" outcome="home"/></td>
+                    <td><p:link value="Вернуться домой" outcome="home.xhtml"/></td>
                     <td>Разработано: Мной</td>
                 </tr>
             </table>

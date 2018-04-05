@@ -18,8 +18,6 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-
-
 /**
  * Исправить логин и регистрацию
  */
@@ -104,14 +102,13 @@ public class LoginBean implements Serializable {
         if (u != null && u.getPassword().equals(user.getPassword())) {
             if (u.getRights().equals("adm"))
                 return "admin/adminPage";
-            return "catalog.xhtml";
+            return "catalog.xhtml?faces-redirect=true";
         } else {
             context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     USER_ISNOT_EXIST, USER_ISNOT_EXIST));
             return null;
         }
     }
-
 
     public boolean isLogged() {
         return  loginEJB.findUser(user) != null;
@@ -123,7 +120,12 @@ public class LoginBean implements Serializable {
 
     public String isSignInUser(UsersEntity user) {
         if (user == null) {
-            return "signIn";
-        } else return "";
+            return "Войти";
+        } else return user.getLogin();
+    }
+
+    public String signOut(){
+        user = new UsersEntity();
+        return "";
     }
 }
